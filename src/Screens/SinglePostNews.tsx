@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,10 +7,12 @@ import {
   View,
 } from 'react-native';
 
-const PageNews = ({route, navigation}: any) => 
+const SinglePostNews = ({route, navigation}: any) => 
 {
     const { title, date, author, imageUrl, description, content} = route.params;
-    navigation.setOptions({ title: title })
+    useEffect(() => {
+        navigation.setOptions({ title: title })
+      }, []);
     return (
         <View style={styles.View}>
             <Text style={styles.Title}>{title}</Text>
@@ -60,4 +62,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PageNews;
+export default SinglePostNews;

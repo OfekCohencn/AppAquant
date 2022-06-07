@@ -13,7 +13,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Screens/Home'
-import PageNews from './src/Screens/PageNews'
+import SinglePostNews from './src/Screens/SinglePostNews'
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +23,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="PageNews" component={PageNews} />
+          <Stack.Screen name="SinglePostNews" component={SinglePostNews} />
       </Stack.Navigator>
     </NavigationContainer>
   );

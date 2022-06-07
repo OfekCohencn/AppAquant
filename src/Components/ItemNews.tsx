@@ -21,7 +21,7 @@ interface Props
 const ItemNews: React.FC<Props> = ({title, date, author, imageUrl, description, content, navigation}) => {
     const ToPageNews = () =>
     {
-        navigation.navigate('PageNews', {title: title, date: date, author: author, imageUrl: imageUrl, description: description, content: content});
+        navigation.navigate('SinglePostNews', {title: title, date: date, author: author, imageUrl: imageUrl, description: description, content: content});
     }
     return (
         <TouchableOpacity style={styles.Button} onPressOut={ToPageNews}>
