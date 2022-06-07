@@ -1,0 +1,6 @@
+module Pods_AquantApp {
+  umbrella header "Pods-AquantApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
