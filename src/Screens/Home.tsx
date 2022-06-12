@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import {API_KEY} from '../Assets/Config'
+import {Categories} from '../Assets/CategoryNames'
 import ItemNews from '../Components/ItemNews';
 import ButtonCategory from '../Components/ButtonCategory';
 
@@ -19,7 +20,6 @@ const Home = ( {navigation} : any) => {
     const [Category, SetCategory] = useState<string>('sport')
     const [Search, SetSearch] = useState<string>('')
     const [SearchFocus, SetSearchFocus] = useState<boolean>(false)
-    let Categories = ['sport', 'general', 'business', 'health', 'technology', 'science']
 
     useEffect(() => {
         ///API///
