@@ -36,10 +36,10 @@ const Home = ( {navigation} : any) => {
             {
                 const delayDebounceFn = setTimeout(() => 
                 {
-                    const ddd = News.filter(item => {
+                    const NewsSearch = News.filter(item => {
                         return item.title.indexOf(Search) > -1;
                     });
-                    SetNews(ddd);
+                    SetNews(NewsSearch);
                 }, 1000) 
                 return () => clearTimeout(delayDebounceFn)
             }
