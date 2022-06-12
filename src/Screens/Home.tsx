@@ -34,14 +34,14 @@ const Home = ( {navigation} : any) => {
             ///Search///
             if(SearchFocus && Search.length > 3)
             {
-                const delayDebounceFn = setTimeout(() => 
+                const delaySearch = setTimeout(() => 
                 {
                     const NewsSearch = News.filter(item => {
                         return item.title.indexOf(Search) > -1;
                     });
                     SetNews(NewsSearch);
                 }, 1000) 
-                return () => clearTimeout(delayDebounceFn)
+                return () => clearTimeout(delaySearch)
             }
     }, [Search]);
     return (
