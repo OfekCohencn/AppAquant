@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import {API_KEY} from '../Assets/Config'
+import {RequestAPI} from '../Assets/ConfigAPI'
 
 interface Props
 {
@@ -19,17 +19,13 @@ interface Props
 const ButtonCategory: React.FC<Props> = ({title, SetNews, active, setActive}) => {
     const pressCategory = () =>
     {
-        fetch(
-            'https://newsapi.org/v2/top-headlines?country=us&category='+ title + '&apiKey=' + API_KEY,
-          )
-            .then(res => res.json())
-            .then(response => {
-                SetNews(response.articles);
+        RequestAPI(title).then(result => {
+            if(result == 'error') console.log('Error Get API');
+            else {
+                SetNews(result);
                 setActive(title)
-            })
-            .catch(error => {
-              console.log(error);
-            });
+            }
+        });
     }
     return (
         <TouchableOpacity style={{backgroundColor: active == title ? '#7fdbae' : '#ddd', width: '28%', padding: 10, borderRadius: 20, margin: 10}} onPress={pressCategory}>

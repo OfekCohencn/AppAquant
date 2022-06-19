@@ -7,9 +7,10 @@ import {
   FlatList,
   View,
   Text,
+  AsyncStorage,
 } from 'react-native';
 
-import {API_KEY} from '../Assets/Config'
+import {RequestAPI} from '../Assets/ConfigAPI'
 import {Categories} from '../Assets/CategoryNames'
 import ItemNews from '../Components/ItemNews';
 import ButtonCategory from '../Components/ButtonCategory';
@@ -23,26 +24,22 @@ const Home = ( {navigation} : any) => {
 
     useEffect(() => {
         ///API///
-        fetch('https://newsapi.org/v2/top-headlines?country=us&category=sport&apiKey=' + API_KEY)
-            .then(res => res.json())
-            .then(response => {
-              SetNews(response.articles);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-            ///Search///
-            if(SearchFocus && Search.length > 3)
+        RequestAPI(Category).then((result : any) => {
+            if(result == 'error') console.log('Error Get API');
+            else SetNews(result);
+        });
+        ///Search///
+        if(SearchFocus && Search.length > 3)
+        {
+            const delaySearch = setTimeout(() => 
             {
-                const delaySearch = setTimeout(() => 
-                {
-                    const NewsSearch = News.filter(item => {
-                        return item.title.indexOf(Search) > -1;
-                    });
-                    SetNews(NewsSearch);
-                }, 1000) 
-                return () => clearTimeout(delaySearch)
-            }
+                const NewsSearch = News.filter(item => {
+                    return item.title.indexOf(Search) > -1;
+                });
+                SetNews(NewsSearch);
+            }, 1000) 
+            return () => clearTimeout(delaySearch)
+        }
     }, [Search]);
     return (
         <SafeAreaView>
@@ -56,7 +53,7 @@ const Home = ( {navigation} : any) => {
                 })}
             </View>
             <FlatList style={styles.FlatList}
-                data={News.slice(0,10)}
+                data={News}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => 
                     <ItemNews title={item.title} date={item.publishedAt} imageUrl={item.urlToImage} 
